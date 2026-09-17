@@ -14,7 +14,9 @@ const getDashboardStats = async (req, res) => {
       totalInquiries,
       newInquiries,
       contactedInquiries,
+      closedInquiries,
       totalProjects,
+      featuredProjects,
       totalServices,
       totalTeamMembers,
       totalReviews,
@@ -22,18 +24,44 @@ const getDashboardStats = async (req, res) => {
       recentInquiries,
       recentReviews,
       allReviewsForRating,
+      inquiriesByService,
+      monthlyInquiryTrends,
     ] = await Promise.all([
       Inquiry.countDocuments(),
       Inquiry.countDocuments({ status: 'new' }),
       Inquiry.countDocuments({ status: 'contacted' }),
+      Inquiry.countDocuments({ status: 'closed' }),
       Project.countDocuments(),
+      Project.countDocuments({ featured: true }),
       Service.countDocuments(),
       TeamMember.countDocuments(),
       Review.countDocuments(),
       Blog.countDocuments(),
-      Inquiry.find().sort({ createdAt: -1 }).limit(5),
+      Inquiry.find().sort({ createdAt: -1 }).limit(6),
       Review.find().sort({ createdAt: -1 }).limit(3),
       Review.find({}, 'rating'),
+
+      // Inquiries grouped by requested service
+      Inquiry.aggregate([
+        { $group: { _id: '$service', count: { $sum: 1 } } },
+        { $sort: { count: -1 } },
+        { $limit: 5 }
+      ]),
+
+      // Monthly inquiry creation trends (last 6 months)
+      Inquiry.aggregate([
+        {
+          $group: {
+            _id: {
+              year: { $year: '$createdAt' },
+              month: { $month: '$createdAt' }
+            },
+            count: { $sum: 1 }
+          }
+        },
+        { $sort: { '_id.year': 1, '_id.month': 1 } },
+        { $limit: 6 }
+      ])
     ]);
 
     // Compute average star rating
@@ -43,6 +71,12 @@ const getDashboardStats = async (req, res) => {
       averageRating = Number((sum / allReviewsForRating.length).toFixed(1));
     }
 
+    // Response rate percentage
+    const respondedCount = contactedInquiries + closedInquiries;
+    const responseRate = totalInquiries > 0 
+      ? Math.round((respondedCount / totalInquiries) * 100) 
+      : 100;
+
     res.status(200).json({
       success: true,
       data: {
@@ -51,9 +85,12 @@ const getDashboardStats = async (req, res) => {
             total: totalInquiries,
             new: newInquiries,
             contacted: contactedInquiries,
+            closed: closedInquiries,
+            responseRate,
           },
           projects: {
             total: totalProjects,
+            featured: featuredProjects,
           },
           services: {
             total: totalServices,
@@ -69,6 +106,8 @@ const getDashboardStats = async (req, res) => {
             total: totalBlogs,
           },
         },
+        inquiriesByService,
+        monthlyInquiryTrends,
         recentInquiries,
         recentReviews,
       },
