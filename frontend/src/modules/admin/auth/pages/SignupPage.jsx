@@ -49,13 +49,13 @@ export const SignupPage = () => {
     try {
       await googleAuth({
         googleId: 'google_oauth_123456789',
-        email: 'admin@stacklinestudio.com',
+        email: 'rababzahra425@gmail.com',
         name: 'Stackline Admin',
         avatarUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop',
       });
       navigate('/admin');
     } catch (err) {
-      setError('Google Sign-In failed. Please try again.');
+      setError('Google Sign-Up failed. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -76,13 +76,15 @@ export const SignupPage = () => {
               <span className="text-xs font-mono font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-md bg-neutral-800 text-neutral-300 border border-neutral-700">ADMIN</span>
             </Link>
           </div>
-          <h1 className="text-base font-bold tracking-tight text-neutral-300">Create Admin Account</h1>
+          <h1 className="text-base font-bold tracking-tight text-neutral-300 font-mono uppercase">
+            Create Admin Account
+          </h1>
           <p className="text-xs font-mono text-neutral-400 uppercase tracking-widest">
-            (Provision new access)
+            (Register for studio portal access)
           </p>
         </div>
 
-        {/* Error Alert */}
+        {/* Error Alert Banner */}
         {error && (
           <div className="flex items-center gap-3 p-4 rounded-md bg-rose-950/50 border border-rose-800/80 text-rose-300 text-sm">
             <AlertCircle className="w-5 h-5 shrink-0" />
@@ -91,9 +93,9 @@ export const SignupPage = () => {
         )}
 
         {/* Form Container */}
-        <form onSubmit={handleSubmit} className="space-y-5">
-          {/* Name Input */}
-          <div className="space-y-2">
+        <form onSubmit={handleSubmit} className="space-y-4">
+          {/* Full Name Input */}
+          <div className="space-y-1.5">
             <label className="block text-xs font-mono uppercase tracking-wider text-neutral-400">
               Full Name
             </label>
@@ -112,7 +114,7 @@ export const SignupPage = () => {
           </div>
 
           {/* Email Input */}
-          <div className="space-y-2">
+          <div className="space-y-1.5">
             <label className="block text-xs font-mono uppercase tracking-wider text-neutral-400">
               Email Address
             </label>
@@ -123,7 +125,7 @@ export const SignupPage = () => {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                placeholder="admin@stacklinestudio.com"
+                placeholder="rababzahra425@gmail.com"
                 required
                 className="w-full bg-[#1c1c1f] border border-neutral-800 focus:border-white rounded-md py-3 pl-11 pr-4 text-sm text-white placeholder-neutral-600 focus:outline-none transition-colors"
               />

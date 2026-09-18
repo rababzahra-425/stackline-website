@@ -156,7 +156,7 @@ export const ForgotPasswordPage = () => {
                       setEmail(e.target.value);
                       if (error) setError('');
                     }}
-                    placeholder="admin@stacklinestudio.com"
+                    placeholder="rababzahra425@gmail.com"
                     required
                     className="w-full bg-[#1c1c1f] border border-neutral-800 focus:border-white rounded-md py-3 pl-11 pr-4 text-sm text-white placeholder-neutral-600 focus:outline-none transition-colors"
                   />

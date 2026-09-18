@@ -40,7 +40,7 @@ export const LoginPage = () => {
       // Simulated Google OAuth login flow (wiring with @react-oauth/google in production)
       await googleAuth({
         googleId: 'google_oauth_123456789',
-        email: 'admin@stacklinestudio.com',
+        email: 'rababzahra425@gmail.com',
         name: 'Stackline Admin',
         avatarUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop',
       });
@@ -95,7 +95,7 @@ export const LoginPage = () => {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                placeholder="admin@stacklinestudio.com"
+                placeholder="rababzahra425@gmail.com"
                 required
                 className="w-full bg-[#1c1c1f] border border-neutral-800 focus:border-white rounded-md py-3 pl-11 pr-4 text-sm text-white placeholder-neutral-600 focus:outline-none transition-colors"
               />

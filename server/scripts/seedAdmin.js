@@ -15,7 +15,7 @@ const seedSuperAdmin = async () => {
     await mongoose.connect(MONGO_URI);
     console.log('✅ Connected to MongoDB.');
 
-    const emails = ['admin@stacklinestudio.com', 'admin@kajostudio.com'];
+    const emails = ['rababzahra425@gmail.com', 'admin@stacklinestudio.com', 'admin@kajostudio.com'];
     const adminPassword = process.env.ADMIN_PASSWORD || 'admin123';
     const adminName = process.env.ADMIN_NAME || 'Alexander Cole';
 
@@ -48,8 +48,9 @@ const seedSuperAdmin = async () => {
     console.log(`
 --------------------------------------------------
 🔑 Stackline Studio Admin Credentials:
-   Emails:   admin@stacklinestudio.com / admin@kajostudio.com
-   Password: ${adminPassword}
+   Primary Email: rababzahra425@gmail.com
+   Other Emails:  admin@stacklinestudio.com / admin@kajostudio.com
+   Password:      ${adminPassword}
 --------------------------------------------------
     `);
     process.exit(0);

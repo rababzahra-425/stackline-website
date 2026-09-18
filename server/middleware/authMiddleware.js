@@ -10,7 +10,7 @@ const protect = async (req, res, next) => {
   ) {
     try {
       token = req.headers.authorization.split(' ')[1];
-      const secret = process.env.JWT_SECRET || 'kajo_admin_secret_key_2026';
+      const secret = process.env.JWT_SECRET || 'stackline_admin_secret_key_2026';
       const decoded = jwt.verify(token, secret);
 
       req.user = await User.findById(decoded.id).select('-password');
