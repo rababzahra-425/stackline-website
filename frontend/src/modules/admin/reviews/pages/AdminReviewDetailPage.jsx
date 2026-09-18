@@ -6,7 +6,6 @@ import { reviewsService } from '../services/reviewsService';
 import {
   ArrowLeft,
   Trash2,
-  Edit3,
   Star,
   Quote,
   Calendar,
@@ -108,14 +107,6 @@ export const AdminReviewDetailPage = () => {
             >
               <ArrowLeft className="w-4 h-4" />
               <span>Back</span>
-            </Link>
-
-            <Link
-              to={`/admin/reviews/${review._id}/edit`}
-              className="px-4 py-2 bg-neutral-900 hover:bg-neutral-800 dark:bg-white dark:hover:bg-neutral-200 text-white dark:text-black text-xs font-mono uppercase tracking-wider font-bold rounded-md transition-colors flex items-center gap-2"
-            >
-              <Edit3 className="w-4 h-4" />
-              <span>Edit</span>
             </Link>
 
             <button

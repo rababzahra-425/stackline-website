@@ -225,7 +225,7 @@ export const ServicePage = () => {
             </section>
 
             {/* 4. CLIENTS TESTIMONIAL SLIDER */}
-            <section className="w-full border-t border-neutral-300 dark:border-neutral-800 bg-[#f4f4f0] dark:bg-[#0d0d0d] text-neutral-900 dark:text-white px-6 md:px-16 py-28 transition-colors duration-300">
+            {/* <section className="w-full border-t border-neutral-300 dark:border-neutral-800 bg-[#f4f4f0] dark:bg-[#0d0d0d] text-neutral-900 dark:text-white px-6 md:px-16 py-28 transition-colors duration-300">
                 <div className="max-w-[1550px] mx-auto">
 
                     <div className="mb-20">
@@ -239,51 +239,48 @@ export const ServicePage = () => {
 
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
 
-                        {/* Left Image Showcase with Arrows */}
-                        <div className="lg:col-span-6 relative aspect-square sm:aspect-[4/3] w-full bg-neutral-200 dark:bg-neutral-900 overflow-hidden">
-                            <img
-                                src={testimonials[activeTestimonial].image}
-                                alt="Client Product Showcase"
-                                className="w-full h-full object-cover"
-                            />
+            <div className="lg:col-span-6 relative aspect-square sm:aspect-[4/3] w-full bg-neutral-200 dark:bg-neutral-900 overflow-hidden">
+                <img
+                    src={testimonials[activeTestimonial].image}
+                    alt="Client Product Showcase"
+                    className="w-full h-full object-cover"
+                />
 
-                            {/* Pagination Arrows */}
-                            <div className="absolute bottom-6 left-6 flex gap-3">
-                                <button
-                                    onClick={prevTestimonial}
-                                    className="h-12 w-12 rounded-full bg-white/80 dark:bg-black/70 backdrop-blur-md border border-neutral-300 dark:border-white/20 flex items-center justify-center text-neutral-900 dark:text-white hover:bg-neutral-900 hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors cursor-pointer"
-                                >
-                                    ←
-                                </button>
-                                <button
-                                    onClick={nextTestimonial}
-                                    className="h-12 w-12 rounded-full bg-white/80 dark:bg-black/70 backdrop-blur-md border border-neutral-300 dark:border-white/20 flex items-center justify-center text-neutral-900 dark:text-white hover:bg-neutral-900 hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors cursor-pointer"
-                                >
-                                    →
-                                </button>
-                            </div>
-                        </div>
-
-                        {/* Right Review Quote */}
-                        <div className="lg:col-span-6 flex flex-col justify-center lg:pl-10">
-                            <span className="text-neutral-500 dark:text-neutral-400 font-mono text-sm tracking-wider uppercase mb-6">
-                                “ {testimonials[activeTestimonial].tag}
-                            </span>
-                            <h3 className="text-3xl sm:text-5xl font-bold uppercase tracking-tight leading-tight mb-8 text-neutral-900 dark:text-white">
-                                {testimonials[activeTestimonial].headline}
-                            </h3>
-                            <p className="text-neutral-600 dark:text-neutral-400 text-lg sm:text-xl leading-relaxed mb-6 font-light">
-                                {testimonials[activeTestimonial].quote}
-                            </p>
-                            <span className="text-neutral-900 dark:text-white font-bold tracking-wider uppercase text-sm">
-                                — {testimonials[activeTestimonial].author}
-                            </span>
-                        </div>
-
-                    </div>
-
+                <div className="absolute bottom-6 left-6 flex gap-3">
+                    <button
+                        onClick={prevTestimonial}
+                        className="h-12 w-12 rounded-full bg-white/80 dark:bg-black/70 backdrop-blur-md border border-neutral-300 dark:border-white/20 flex items-center justify-center text-neutral-900 dark:text-white hover:bg-neutral-900 hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors cursor-pointer"
+                    >
+                        ←
+                    </button>
+                    <button
+                        onClick={nextTestimonial}
+                        className="h-12 w-12 rounded-full bg-white/80 dark:bg-black/70 backdrop-blur-md border border-neutral-300 dark:border-white/20 flex items-center justify-center text-neutral-900 dark:text-white hover:bg-neutral-900 hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors cursor-pointer"
+                    >
+                        →
+                    </button>
                 </div>
-            </section>
+            </div>
+
+            <div className="lg:col-span-6 flex flex-col justify-center lg:pl-10">
+                <span className="text-neutral-500 dark:text-neutral-400 font-mono text-sm tracking-wider uppercase mb-6">
+                    “ {testimonials[activeTestimonial].tag}
+                </span>
+                <h3 className="text-3xl sm:text-5xl font-bold uppercase tracking-tight leading-tight mb-8 text-neutral-900 dark:text-white">
+                    {testimonials[activeTestimonial].headline}
+                </h3>
+                <p className="text-neutral-600 dark:text-neutral-400 text-lg sm:text-xl leading-relaxed mb-6 font-light">
+                    {testimonials[activeTestimonial].quote}
+                </p>
+                <span className="text-neutral-900 dark:text-white font-bold tracking-wider uppercase text-sm">
+                    — {testimonials[activeTestimonial].author}
+                </span>
+            </div>
+
+        </div>
+
+                </div >
+            </section > */}
 
             {/* 5. PROCESS SECTION */}
             <section className="relative w-full bg-[#f4f4f0] dark:bg-[#0d0d0e] text-neutral-900 dark:text-white transition-colors duration-300 pt-16 pb-40">

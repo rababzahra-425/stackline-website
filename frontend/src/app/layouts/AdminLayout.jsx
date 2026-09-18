@@ -12,7 +12,6 @@ import {
   Search,
   User as UserIcon,
   ShieldCheck,
-  Sparkles,
   Command,
   Settings as SettingsIcon,
   MessageSquareQuote,
@@ -76,7 +75,6 @@ export const AdminLayout = () => {
     {
       title: 'Others',
       items: [
-        { name: 'Marketing & SEO', path: '/admin/settings', icon: Sparkles },
         { name: 'Settings', path: '/admin/settings', icon: SettingsIcon },
       ],
     },

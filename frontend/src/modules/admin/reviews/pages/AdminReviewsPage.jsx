@@ -8,7 +8,6 @@ import {
   Search,
   Plus,
   Trash2,
-  Edit3,
   Eye,
   Star,
   CheckCircle2,
@@ -250,13 +249,6 @@ export const AdminReviewsPage = () => {
                     title="View Full Details Page"
                   >
                     <Eye className="w-4 h-4" />
-                  </Link>
-                  <Link
-                    to={`/admin/reviews/${rev._id}/edit`}
-                    className="w-8 h-8 rounded-md bg-slate-100 dark:bg-zinc-800 hover:bg-slate-200 dark:hover:bg-zinc-700 text-slate-500 flex items-center justify-center transition-colors cursor-pointer"
-                    title="Edit Review"
-                  >
-                    <Edit3 className="w-4 h-4" />
                   </Link>
                   <button
                     onClick={() => setDeleteId(rev._id)}
