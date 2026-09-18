@@ -7,9 +7,14 @@ export const PageHeader = ({
   className = '',
 }) => {
   return (
-    <div className="w-full bg-[#0d0d0e] transition-colors duration-300">
-      {/* 1. TOP HEADER BANNER WITH BACKGROUND IMAGE */}
-      <div className="relative w-full overflow-hidden bg-neutral-950 min-h-[220px] sm:min-h-[280px] md:min-h-[340px] flex flex-col justify-between">
+    <div className="relative w-full bg-[#0d0d0e] transition-colors duration-300">
+      {/* 1. FLOATING NAVBAR LAYER (ALWAYS Z-50 ON TOP) */}
+      <div className="relative z-50 w-full">
+        <Navbar />
+      </div>
+
+      {/* 2. TOP HEADER BANNER WITH BACKGROUND IMAGE */}
+      <div className="relative z-0 w-full overflow-hidden bg-neutral-950 h-[100px] sm:h-[130px] md:h-[160px] -mt-14 sm:-mt-16 md:-mt-20">
         {/* Background Image Layer */}
         <div className="absolute inset-0 z-0">
           <img
@@ -19,16 +24,11 @@ export const PageHeader = ({
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-neutral-950/90" />
         </div>
-
-        {/* Floating Pill Navbar Component */}
-        <div className="relative z-30 pb-8 sm:pb-12 md:pb-14">
-          <Navbar />
-        </div>
       </div>
 
-      {/* 2. OVERLAPPING ROUNDED CONTENT CARD */}
+      {/* 3. OVERLAPPING ROUNDED CONTENT CARD */}
       <div
-        className={`relative z-30 -mt-22 sm:-mt-36 md:-mt-48 rounded-t-[1.5rem] sm:rounded-t-[2.5rem] bg-[#f4f4f0] dark:bg-[#0d0d0e] text-neutral-900 dark:text-neutral-100 shadow-[0_-25px_60px_rgba(0,0,0,0.25)] pt-10 sm:pt-14 md:pt-16 transition-colors duration-300 ${className}`}
+        className={`relative z-10 -mt-10 sm:-mt-14 md:-mt-18 rounded-t-[1.5rem] sm:rounded-t-[2.5rem] bg-[#f4f4f0] dark:bg-[#0d0d0e] text-neutral-900 dark:text-neutral-100 shadow-[0_-25px_60px_rgba(0,0,0,0.25)] pt-6 sm:pt-8 md:pt-10 transition-colors duration-300 ${className}`}
       >
         {children}
       </div>

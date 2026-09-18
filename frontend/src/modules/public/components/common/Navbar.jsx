@@ -150,15 +150,37 @@ export const Navbar = ({ variant }) => {
 
         {/* Mobile Hamburger Menu Overlay */}
         {isOpen && (
-          <div className="fixed inset-0 z-50 bg-[#f4f4f0]/95 dark:bg-[#0d0d0e]/95 backdrop-blur-2xl flex flex-col justify-between p-8 pt-24 md:hidden transition-all duration-300">
-            <div className="flex flex-col space-y-6 my-auto items-start">
-              <span className="font-mono text-xs uppercase tracking-widest text-neutral-500 dark:text-neutral-400 mb-2">
+          <div className="fixed inset-0 z-[100] bg-[#f4f4f0]/98 dark:bg-[#0d0d0e]/98 backdrop-blur-2xl flex flex-col justify-between p-6 sm:p-8 md:hidden transition-all duration-300">
+            {/* Top Bar with Brand & Close/Cross Button */}
+            <div className="flex items-center justify-between w-full pb-6 border-b border-neutral-300 dark:border-neutral-800">
+              <Link
+                to="/"
+                onClick={() => setIsOpen(false)}
+                className="font-sans text-xs sm:text-sm font-extrabold uppercase tracking-wider text-neutral-950 dark:text-white flex items-center gap-2"
+              >
+                <img src="/logo_1.svg" alt="Stackline Studio Logo" className="w-6 h-6 object-contain text-neutral-950 dark:text-white" />
+                <span>STACKLINE STUDIO</span>
+              </Link>
+
+              <button
+                onClick={() => setIsOpen(false)}
+                className="p-2.5 rounded-full bg-neutral-200 dark:bg-neutral-800 text-neutral-950 dark:text-white hover:bg-neutral-300 dark:hover:bg-neutral-700 transition-colors focus:outline-none cursor-pointer"
+                aria-label="Close navigation menu"
+              >
+                <X className="w-6 h-6" />
+              </button>
+            </div>
+
+            {/* Main Links */}
+            <div className="flex flex-col space-y-6 my-auto items-start py-4">
+              <span className="font-mono text-xs uppercase tracking-widest text-neutral-500 dark:text-neutral-400 mb-1 font-semibold">
                 (Navigation)
               </span>
               {navLinks.map((link) => renderLink(link, true))}
             </div>
 
-            <div className="pt-8 border-t border-neutral-300 dark:border-neutral-800 flex justify-between items-center font-mono text-xs uppercase tracking-widest text-neutral-500 dark:text-neutral-400">
+            {/* Footer Bar */}
+            <div className="pt-6 border-t border-neutral-300 dark:border-neutral-800 flex justify-between items-center font-mono text-xs uppercase tracking-widest text-neutral-500 dark:text-neutral-400">
               <span>© STACKLINE STUDIO</span>
               <span>Prague, CZ</span>
             </div>
@@ -168,7 +190,7 @@ export const Navbar = ({ variant }) => {
     );
   }
 
-  // LANDING PAGE NAVBAR (Unchanged)
+  // LANDING PAGE NAVBAR
   return (
     <header className="w-full py-2 sm:py-4 z-40 transition-colors duration-300 relative">
       {/* DESKTOP NAV (Hidden on mobile < md, visible on md+) */}
@@ -203,16 +225,38 @@ export const Navbar = ({ variant }) => {
 
       {/* MOBILE HAMBURGER MENU OVERLAY */}
       {isOpen && (
-        <div className="fixed inset-0 z-40 bg-[#f4f4f0]/95 dark:bg-[#0d0d0e]/95 backdrop-blur-2xl flex flex-col justify-between p-8 pt-24 md:hidden transition-all duration-300">
-          <div className="flex flex-col space-y-6 my-auto items-start">
-            <span className="font-mono text-xs uppercase tracking-widest text-neutral-500 dark:text-neutral-400 mb-2">
+        <div className="fixed inset-0 z-[100] bg-[#f4f4f0]/98 dark:bg-[#0d0d0e]/98 backdrop-blur-2xl flex flex-col justify-between p-6 sm:p-8 md:hidden transition-all duration-300">
+          {/* Top Bar with Brand & Close/Cross Button */}
+          <div className="flex items-center justify-between w-full pb-6 border-b border-neutral-300 dark:border-neutral-800">
+            <Link
+              to="/"
+              onClick={() => setIsOpen(false)}
+              className="font-sans text-xs sm:text-sm font-extrabold uppercase tracking-wider text-neutral-950 dark:text-white flex items-center gap-2"
+            >
+              <img src="/logo_1.svg" alt="Stackline Studio Logo" className="w-6 h-6 object-contain text-neutral-950 dark:text-white" />
+              <span>STACKLINE STUDIO</span>
+            </Link>
+
+            <button
+              onClick={() => setIsOpen(false)}
+              className="p-2.5 rounded-full bg-neutral-200 dark:bg-neutral-800 text-neutral-950 dark:text-white hover:bg-neutral-300 dark:hover:bg-neutral-700 transition-colors focus:outline-none cursor-pointer"
+              aria-label="Close navigation menu"
+            >
+              <X className="w-6 h-6" />
+            </button>
+          </div>
+
+          {/* Main Links */}
+          <div className="flex flex-col space-y-6 my-auto items-start py-4">
+            <span className="font-mono text-xs uppercase tracking-widest text-neutral-500 dark:text-neutral-400 mb-1 font-semibold">
               (Navigation)
             </span>
             {navLinks.map((link) => renderLink(link, true))}
           </div>
 
-          <div className="pt-8 border-t border-neutral-300 dark:border-neutral-800 flex justify-between items-center font-mono text-xs uppercase tracking-widest text-neutral-500 dark:text-neutral-400">
-            <span>© CRAFT & LOGIC</span>
+          {/* Footer Bar */}
+          <div className="pt-6 border-t border-neutral-300 dark:border-neutral-800 flex justify-between items-center font-mono text-xs uppercase tracking-widest text-neutral-500 dark:text-neutral-400">
+            <span>© STACKLINE STUDIO</span>
             <span>Prague, CZ</span>
           </div>
         </div>
