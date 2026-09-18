@@ -136,7 +136,7 @@ export const AdminInquiriesListPage = () => {
       {/* 1. PAGE HEADER */}
       <AdminPageHeader
         title="Inquiries & Lead Inbox"
-        subtitle="Review client contact form submissions, services requested, budget scopes, and respond to incoming leads."
+        subtitle="Review client contact form submissions, services requested, and respond to incoming leads."
         badgeText="INQUIRIES MODULE"
       />
 

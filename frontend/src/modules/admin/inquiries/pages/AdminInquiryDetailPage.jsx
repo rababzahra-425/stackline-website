@@ -11,7 +11,6 @@ import {
   CheckCircle2,
   Send,
   User,
-  DollarSign,
   Tag,
   Clock,
   ShieldAlert,
@@ -69,6 +68,26 @@ export const AdminInquiryDetailPage = () => {
     }
   };
 
+  const formatDateTime12h = (dateString) => {
+    if (!dateString) return '';
+    return new Date(dateString).toLocaleString('en-US', {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric',
+      hour: 'numeric',
+      minute: '2-digit',
+      hour12: true,
+    });
+  };
+
+  const handleReplyClick = () => {
+    setTimeout(() => {
+      if (inquiry && inquiry.status !== 'replied') {
+        handleStatusChange('replied');
+      }
+    }, 150);
+  };
+
   if (loading) {
     return (
       <div className="p-12 text-center text-neutral-500 font-mono text-sm max-w-[1300px] mx-auto">
@@ -88,17 +107,18 @@ export const AdminInquiryDetailPage = () => {
     );
   }
 
+  const mailtoSubject = encodeURIComponent(`Re: ${inquiry.service || 'Studio'} Inquiry - Stackline Studio`);
+  const mailtoUrl = `mailto:${inquiry.email}?subject=${mailtoSubject}`;
+
   return (
     <div className="space-y-8 max-w-[1300px] mx-auto pb-16 font-sans">
       {/* NAVIGATION BAR */}
       <div className="flex items-center justify-end">
         <div className="flex items-center gap-3">
           <a
-            href={`mailto:${inquiry.email}?subject=${encodeURIComponent(
-              `Re: ${inquiry.service} Inquiry - KAJO Studio`
-            )}`}
-            onClick={() => handleStatusChange('replied')}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-neutral-900 dark:bg-white text-white dark:text-black text-xs font-mono font-bold uppercase transition-colors"
+            href={mailtoUrl}
+            onClick={handleReplyClick}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-neutral-900 dark:bg-white text-white dark:text-black text-xs font-mono font-bold uppercase transition-colors cursor-pointer"
           >
             <Send className="w-3.5 h-3.5" />
             <span>Reply via Email</span>
@@ -116,7 +136,7 @@ export const AdminInquiryDetailPage = () => {
 
       <AdminPageHeader
         title={`Lead Submission: ${inquiry.name}`}
-        subtitle={`Submitted on ${new Date(inquiry.createdAt).toLocaleString()}`}
+        subtitle={`Submitted on ${formatDateTime12h(inquiry.createdAt)}`}
         badgeText={`STATUS: ${inquiry.status.toUpperCase()}`}
       />
 
@@ -173,23 +193,13 @@ export const AdminInquiryDetailPage = () => {
           </a>
         </div>
 
-        <div className="p-6 rounded-md bg-white dark:bg-[#141416] border border-neutral-200 dark:border-neutral-800 shadow-sm space-y-1">
+        <div className="p-6 rounded-md bg-white dark:bg-[#141416] border border-neutral-200 dark:border-neutral-800 shadow-sm space-y-1 sm:col-span-2">
           <div className="flex items-center gap-2 text-neutral-400">
             <Tag className="w-4 h-4" />
             <span className="text-[11px] font-mono uppercase tracking-wider">Requested Service</span>
           </div>
           <span className="block text-lg font-bold text-neutral-900 dark:text-white font-mono">
             {inquiry.service}
-          </span>
-        </div>
-
-        <div className="p-6 rounded-md bg-white dark:bg-[#141416] border border-neutral-200 dark:border-neutral-800 shadow-sm space-y-1">
-          <div className="flex items-center gap-2 text-neutral-400">
-            <DollarSign className="w-4 h-4" />
-            <span className="text-[11px] font-mono uppercase tracking-wider">Budget Range</span>
-          </div>
-          <span className="block text-lg font-bold text-neutral-900 dark:text-white font-mono">
-            {inquiry.budget}
           </span>
         </div>
       </div>
@@ -210,11 +220,10 @@ export const AdminInquiryDetailPage = () => {
             <button
               key={st}
               onClick={() => handleStatusChange(st)}
-              className={`px-3.5 py-1.5 rounded-md font-mono text-xs uppercase tracking-wider transition-colors ${
-                inquiry.status === st
+              className={`px-3.5 py-1.5 rounded-md font-mono text-xs uppercase tracking-wider transition-colors ${inquiry.status === st
                   ? 'bg-neutral-950 text-white dark:bg-white dark:text-black font-bold shadow-sm'
                   : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-500 hover:text-neutral-900 dark:hover:text-white'
-              }`}
+                }`}
             >
               {st}
             </button>

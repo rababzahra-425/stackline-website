@@ -19,15 +19,14 @@ const createInquiry = async (inquiryData) => {
   const inquiry = await Inquiry.create({
     name: inquiryData.name,
     email: inquiryData.email,
-    service: inquiryData.service || 'Branding',
-    budget: inquiryData.budget || '$10k - $25k',
+    service: inquiryData.service || 'Website Design',
     message: inquiryData.message,
     status: 'new',
   });
 
   // 2. Dispatch Email Alert to Admin (rababzahra425@gmail.com)
   const adminEmail = process.env.ADMIN_ALERT_EMAIL || 'rababzahra425@gmail.com';
-  
+
   try {
     console.log(`📩 Dispatching inquiry alert email to admin: ${adminEmail}...`);
     await sendInquiryAlertEmail({ adminEmail, inquiry });

@@ -8,8 +8,7 @@ export const TalkPage = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    service: 'Branding',
-    budget: '$10k - $25k',
+    service: 'Website Design',
     message: '',
   });
 
@@ -38,8 +37,7 @@ export const TalkPage = () => {
     }
   };
 
-  const services = ['Branding', 'Website Design', 'UI/UX Design', 'Full Package'];
-  const budgets = ['<$10k', '$10k - $25k', '$25k - $50k', '$50k+'];
+  const services = ['Website Design', 'UI/UX Design', 'Mobile App', 'Full Package'];
 
   return (
     <PageHeader bgImage="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=2000&auto=format&fit=crop">
@@ -74,7 +72,7 @@ export const TalkPage = () => {
                 </span>
                 <a
                   href="mailto:rababzahra425@gmail.com"
-                  className="text-2xl sm:text-4xl font-black uppercase tracking-tight text-neutral-950 dark:text-white hover:text-neutral-600 dark:hover:text-neutral-300 transition-colors font-mono"
+                  className="text-2xl sm:text-4xl font-black tracking-tight text-neutral-950 dark:text-white hover:text-neutral-600 dark:hover:text-neutral-300 transition-colors font-mono"
                 >
                   rababzahra425@gmail.com
                 </a>
@@ -85,21 +83,11 @@ export const TalkPage = () => {
                   (Call Us)
                 </span>
                 <a
-                  href="tel:+15550192834"
+                  href="tel:+923104443936"
                   className="text-2xl sm:text-3xl font-mono text-neutral-900 dark:text-neutral-100 font-semibold hover:text-neutral-600 dark:hover:text-neutral-300 transition-colors"
                 >
-                  +1 (555) 019-2834
+                  +92 310 4443936
                 </a>
-              </div>
-
-              <div>
-                <span className="font-mono text-xs md:text-sm uppercase tracking-widest text-neutral-500 dark:text-neutral-400 block mb-3 font-semibold">
-                  (Studio Location)
-                </span>
-                <p className="text-xl text-neutral-800 dark:text-neutral-200 leading-snug font-normal">
-                  450 Studio Way, Suite 800<br />
-                  New York, NY 10001
-                </p>
               </div>
             </div>
 
@@ -126,7 +114,7 @@ export const TalkPage = () => {
                   Message Received
                 </h3>
                 <p className="text-lg text-neutral-600 dark:text-neutral-300 max-w-md mx-auto leading-relaxed">
-                  Thank you for reaching out! Your inquiry has been submitted to KAJO Studio Admin and emailed to <strong>rababzahra425@gmail.com</strong>.
+                  Thank you for reaching out! Your inquiry has been submitted to Stackline Studio Admin and emailed to <strong>rababzahra425@gmail.com</strong>.
                 </p>
                 <button
                   onClick={() => {
@@ -134,8 +122,7 @@ export const TalkPage = () => {
                     setFormData({
                       name: '',
                       email: '',
-                      service: 'Branding',
-                      budget: '$10k - $25k',
+                      service: 'Website Design',
                       message: '',
                     });
                   }}
@@ -165,34 +152,10 @@ export const TalkPage = () => {
                         key={item}
                         type="button"
                         onClick={() => setFormData({ ...formData, service: item })}
-                        className={`px-6 py-3 rounded-full font-mono text-xs md:text-sm uppercase tracking-wider transition-all duration-200 ${
-                          formData.service === item
-                            ? 'bg-neutral-950 text-white dark:bg-white dark:text-black font-semibold shadow-md'
-                            : 'bg-neutral-100 text-neutral-800 dark:bg-neutral-800/80 dark:text-neutral-200 hover:bg-neutral-200 dark:hover:bg-neutral-700 font-medium'
-                        }`}
-                      >
-                        {item}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Budget Selection */}
-                <div>
-                  <label className="font-mono text-xs md:text-sm uppercase tracking-widest text-neutral-600 dark:text-neutral-400 block mb-4 font-semibold">
-                    02. Expected Budget Range
-                  </label>
-                  <div className="flex flex-wrap gap-3">
-                    {budgets.map((item) => (
-                      <button
-                        key={item}
-                        type="button"
-                        onClick={() => setFormData({ ...formData, budget: item })}
-                        className={`px-6 py-3 rounded-full font-mono text-xs md:text-sm uppercase tracking-wider transition-all duration-200 ${
-                          formData.budget === item
-                            ? 'bg-neutral-950 text-white dark:bg-white dark:text-black font-semibold shadow-md'
-                            : 'bg-neutral-100 text-neutral-800 dark:bg-neutral-800/80 dark:text-neutral-200 hover:bg-neutral-200 dark:hover:bg-neutral-700 font-medium'
-                        }`}
+                        className={`px-6 py-3 rounded-full font-mono text-xs md:text-sm uppercase tracking-wider transition-all duration-200 ${formData.service === item
+                          ? 'bg-neutral-950 text-white dark:bg-white dark:text-black font-semibold shadow-md'
+                          : 'bg-neutral-100 text-neutral-800 dark:bg-neutral-800/80 dark:text-neutral-200 hover:bg-neutral-200 dark:hover:bg-neutral-700 font-medium'
+                          }`}
                       >
                         {item}
                       </button>
@@ -204,7 +167,7 @@ export const TalkPage = () => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div>
                     <label className="font-mono text-xs md:text-sm uppercase tracking-widest text-neutral-600 dark:text-neutral-400 block mb-3 font-semibold">
-                      03. Your Name *
+                      02. Your Name *
                     </label>
                     <input
                       type="text"
@@ -217,7 +180,7 @@ export const TalkPage = () => {
                   </div>
                   <div>
                     <label className="font-mono text-xs md:text-sm uppercase tracking-widest text-neutral-600 dark:text-neutral-400 block mb-3 font-semibold">
-                      04. Your Email *
+                      03. Your Email *
                     </label>
                     <input
                       type="email"
@@ -233,7 +196,7 @@ export const TalkPage = () => {
                 {/* Message */}
                 <div>
                   <label className="font-mono text-xs md:text-sm uppercase tracking-widest text-neutral-600 dark:text-neutral-400 block mb-3 font-semibold">
-                    05. Project Details *
+                    04. Project Details *
                   </label>
                   <textarea
                     rows={5}

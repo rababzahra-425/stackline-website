@@ -16,11 +16,7 @@ const inquirySchema = new mongoose.Schema(
     service: {
       type: String,
       required: [true, 'Service selection is required'],
-      default: 'Branding', // e.g. "Branding", "Web Development", "UI/UX", "Full Scope"
-    },
-    budget: {
-      type: String,
-      default: '$10k - $25k', // e.g. "< $10k", "$10k - $25k", "$25k - $50k", "$50k+"
+      default: 'Website Design', // e.g. "Website Design", "UI/UX Design", "Mobile App", "Full Package"
     },
     message: {
       type: String,
