@@ -42,31 +42,31 @@ import React from 'react';
 const projects = [
     {
         id: 1,
-        title: 'Acme',
-        year: '2024',
+        title: 'Trust Marketing',
+        year: '2026',
         bgGradient: 'from-stone-800 via-stone-700 to-stone-900',
-        logo: 'acme',
+        logo: 'Trust Marketing',
     },
     {
         id: 2,
-        title: 'Kanba',
-        year: '2024',
+        title: 'DentisTree Clinic',
+        year: '2025',
         bgGradient: 'from-zinc-900 via-neutral-800 to-stone-900',
-        logo: 'kanba',
+        logo: 'DentisTree Clinic',
     },
     {
         id: 3,
-        title: 'OUTOSIA',
+        title: 'Website UI/UX',
         year: '2024',
         bgGradient: 'from-neutral-800 via-zinc-800 to-neutral-950',
-        logo: 'OUTOSIA',
+        logo: 'Jawelery-Website UI/UX',
     },
     {
         id: 4,
-        title: 'goldline',
+        title: 'SocialNetwork App',
         year: '2024',
         bgGradient: 'from-stone-900 via-neutral-900 to-stone-800',
-        logo: 'goldline',
+        logo: 'Geolocator',
     },
 ];
 

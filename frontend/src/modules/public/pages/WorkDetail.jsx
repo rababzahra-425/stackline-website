@@ -112,11 +112,11 @@ export const WorkDetailPage = () => {
         </div>
 
         {/* 4. FULL-WIDTH HERO COVER BANNER */}
-        <div className="w-full aspect-[16/8] sm:aspect-[16/9] overflow-hidden rounded-2xl md:rounded-3xl bg-neutral-200 dark:bg-neutral-800 mb-16 sm:mb-28 shadow-sm">
+        <div className="w-full min-h-[280px] sm:min-h-[420px] md:min-h-[550px] overflow-hidden rounded-2xl md:rounded-3xl bg-neutral-100 dark:bg-neutral-900/90 border border-neutral-200 dark:border-neutral-800/80 mb-16 sm:mb-28 shadow-sm flex items-center justify-center p-3 sm:p-6">
           <img
             src={project.heroImage || project.mainImage}
             alt={project.title}
-            className="w-full h-full object-cover"
+            className="w-full h-auto max-h-[85vh] object-contain rounded-xl md:rounded-2xl"
           />
         </div>
 
@@ -159,14 +159,14 @@ export const WorkDetailPage = () => {
             {/* ROW 1: 2 SIDE-BY-SIDE IMAGES */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
               {gallery[0] && (
-                <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl md:rounded-3xl bg-neutral-900 group">
+                <div className="relative w-full min-h-[280px] sm:min-h-[380px] md:min-h-[460px] flex items-center justify-center overflow-hidden rounded-2xl md:rounded-3xl bg-neutral-100 dark:bg-neutral-900/90 border border-neutral-200 dark:border-neutral-800/80 group p-3 sm:p-6">
                   <img
                     src={gallery[0]}
                     alt={`${project.title} Showcase 1`}
-                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                    className="w-full h-full max-h-[75vh] object-contain transition-transform duration-700 ease-out group-hover:scale-[1.02]"
                   />
                   {/* Subtle Logo overlay on Image 1 as in reference */}
-                  <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-transparent transition-colors">
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-transparent transition-colors pointer-events-none rounded-2xl md:rounded-3xl">
                     <span className="text-2xl sm:text-4xl font-black uppercase tracking-tight text-white drop-shadow-md select-none font-hero-heading flex items-center gap-2">
                       <span>❖</span> {project.title}
                     </span>
@@ -175,11 +175,11 @@ export const WorkDetailPage = () => {
               )}
 
               {gallery[1] && (
-                <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl md:rounded-3xl bg-neutral-900 group">
+                <div className="relative w-full min-h-[280px] sm:min-h-[380px] md:min-h-[460px] flex items-center justify-center overflow-hidden rounded-2xl md:rounded-3xl bg-neutral-100 dark:bg-neutral-900/90 border border-neutral-200 dark:border-neutral-800/80 group p-3 sm:p-6">
                   <img
                     src={gallery[1]}
                     alt={`${project.title} Showcase 2`}
-                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                    className="w-full h-full max-h-[75vh] object-contain transition-transform duration-700 ease-out group-hover:scale-[1.02]"
                   />
                 </div>
               )}
@@ -187,11 +187,11 @@ export const WorkDetailPage = () => {
 
             {/* ROW 2: 1 FULL-WIDTH BANNER IMAGE */}
             {gallery[2] && (
-              <div className="relative aspect-[16/9] w-full overflow-hidden rounded-2xl md:rounded-3xl bg-neutral-900 group">
+              <div className="relative w-full min-h-[300px] sm:min-h-[450px] md:min-h-[550px] flex items-center justify-center overflow-hidden rounded-2xl md:rounded-3xl bg-neutral-100 dark:bg-neutral-900/90 border border-neutral-200 dark:border-neutral-800/80 group p-4 sm:p-8">
                 <img
                   src={gallery[2]}
                   alt={`${project.title} Showcase 3 Banner`}
-                  className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                  className="w-full h-full max-h-[85vh] object-contain transition-transform duration-700 ease-out group-hover:scale-[1.02]"
                 />
               </div>
             )}
@@ -200,21 +200,21 @@ export const WorkDetailPage = () => {
             {(gallery[3] || gallery[4]) && (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
                 {gallery[3] && (
-                  <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl md:rounded-3xl bg-neutral-900 group">
+                  <div className="relative w-full min-h-[280px] sm:min-h-[380px] md:min-h-[460px] flex items-center justify-center overflow-hidden rounded-2xl md:rounded-3xl bg-neutral-100 dark:bg-neutral-900/90 border border-neutral-200 dark:border-neutral-800/80 group p-3 sm:p-6">
                     <img
                       src={gallery[3]}
                       alt={`${project.title} Showcase 4`}
-                      className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                      className="w-full h-full max-h-[75vh] object-contain transition-transform duration-700 ease-out group-hover:scale-[1.02]"
                     />
                   </div>
                 )}
 
                 {gallery[4] && (
-                  <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl md:rounded-3xl bg-neutral-900 group">
+                  <div className="relative w-full min-h-[280px] sm:min-h-[380px] md:min-h-[460px] flex items-center justify-center overflow-hidden rounded-2xl md:rounded-3xl bg-neutral-100 dark:bg-neutral-900/90 border border-neutral-200 dark:border-neutral-800/80 group p-3 sm:p-6">
                     <img
                       src={gallery[4]}
                       alt={`${project.title} Showcase 5`}
-                      className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                      className="w-full h-full max-h-[75vh] object-contain transition-transform duration-700 ease-out group-hover:scale-[1.02]"
                     />
                   </div>
                 )}
@@ -227,12 +227,12 @@ export const WorkDetailPage = () => {
                 {gallery.slice(5).map((imgUrl, i) => (
                   <div
                     key={i}
-                    className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl md:rounded-3xl bg-neutral-900 group"
+                    className="relative w-full min-h-[280px] sm:min-h-[380px] md:min-h-[460px] flex items-center justify-center overflow-hidden rounded-2xl md:rounded-3xl bg-neutral-100 dark:bg-neutral-900/90 border border-neutral-200 dark:border-neutral-800/80 group p-3 sm:p-6"
                   >
                     <img
                       src={imgUrl}
                       alt={`${project.title} Showcase ${i + 6}`}
-                      className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                      className="w-full h-full max-h-[75vh] object-contain transition-transform duration-700 ease-out group-hover:scale-[1.02]"
                     />
                   </div>
                 ))}
