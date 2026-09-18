@@ -124,9 +124,9 @@ export const BlogDetailPage = () => {
             </div>
 
             {/* Giant Title */}
-            <h1 className="font-hero-heading text-[48px] sm:text-[88px] md:text-[110px] lg:text-[140px] uppercase tracking-tight leading-[0.85] select-none mb-8 text-neutral-950 dark:text-white">
+            <h3 className="font-hero-heading text-[28px] sm:text-[32px] md:text-[42px] lg:text-[52px] uppercase tracking-tight leading-[0.85] select-none mb-8 text-neutral-950 dark:text-white">
               {post.title}
-            </h1>
+            </h3>
 
             {/* Subtitle */}
             {post.subtitle && (

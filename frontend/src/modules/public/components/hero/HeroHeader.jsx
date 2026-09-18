@@ -13,9 +13,6 @@ export const HeroHeader = () => {
 
       {/* Line 1: ©STACKLINE */}
       <h1 className="font-hero-heading text-[28px] sm:text-[42px] md:text-[56px] lg:text-[72px] xl:text-[84px] tracking-tighter text-current flex items-baseline gap-1.5 sm:gap-2 leading-[0.9]">
-        <span className="text-[0.55em] font-normal leading-none inline-block transform -translate-y-1 sm:-translate-y-2">
-          ©
-        </span>
         STACKLINE
       </h1>
 
@@ -28,9 +25,6 @@ export const HeroHeader = () => {
 
       {/* Subtitle / Bracket text */}
       <div className="mt-2 pl-0.5">
-        <span className="font-bracket text-sm sm:text-base md:text-lg tracking-normal opacity-80">
-          (Based in Prague)
-        </span>
       </div>
     </div>
   );
