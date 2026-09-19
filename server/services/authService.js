@@ -128,7 +128,8 @@ const loginUser = async ({ email, password }) => {
     throw { status: 400, message: 'Please provide email and password' };
   }
 
-  const user = await User.findOne({ email: email.toLowerCase() }).select('+password');
+  const cleanEmail = email.trim().toLowerCase();
+  const user = await User.findOne({ email: cleanEmail }).select('+password');
   if (!user) {
     throw { status: 401, message: 'Invalid credentials' };
   }

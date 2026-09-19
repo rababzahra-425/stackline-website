@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Lock, Mail, ArrowRight, AlertCircle, CheckCircle2 } from 'lucide-react';
+import { Lock, Mail, ArrowRight, AlertCircle, CheckCircle2, Eye, EyeOff } from 'lucide-react';
 
 export const LoginPage = () => {
   const navigate = useNavigate();
   const { login, googleAuth } = useAuth();
-  
+
   const [formData, setFormData] = useState({ email: '', password: '' });
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -25,7 +26,7 @@ export const LoginPage = () => {
 
     setIsSubmitting(true);
     try {
-      await login(formData.email, formData.password);
+      await login(formData.email.trim(), formData.password);
       navigate('/admin');
     } catch (err) {
       setError(err.message || 'Login failed. Please check your credentials.');
@@ -55,7 +56,7 @@ export const LoginPage = () => {
   return (
     <div className="min-h-screen w-full bg-[#0d0d0e] text-neutral-100 flex items-center justify-center p-6 selection:bg-white selection:text-black">
       <div className="w-full max-w-md space-y-8 bg-[#141416] p-8 sm:p-10 rounded-md border border-neutral-800 shadow-2xl">
-        
+
         {/* Header Branding */}
         <div className="text-center space-y-3">
           <div className="flex items-center justify-center gap-3">
@@ -95,7 +96,7 @@ export const LoginPage = () => {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                placeholder="rababzahra425@gmail.com"
+                placeholder="---@gmail.com"
                 required
                 className="w-full bg-[#1c1c1f] border border-neutral-800 focus:border-white rounded-md py-3 pl-11 pr-4 text-sm text-white placeholder-neutral-600 focus:outline-none transition-colors"
               />
@@ -118,14 +119,22 @@ export const LoginPage = () => {
             <div className="relative">
               <Lock className="w-4 h-4 absolute left-4 top-1/2 -translate-y-1/2 text-neutral-500" />
               <input
-                type="password"
+                type={showPassword ? 'text' : 'password'}
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
                 placeholder="••••••••"
                 required
-                className="w-full bg-[#1c1c1f] border border-neutral-800 focus:border-white rounded-md py-3 pl-11 pr-4 text-sm text-white placeholder-neutral-600 focus:outline-none transition-colors"
+                className="w-full bg-[#1c1c1f] border border-neutral-800 focus:border-white rounded-md py-3 pl-11 pr-11 text-sm text-white placeholder-neutral-600 focus:outline-none transition-colors"
               />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-neutral-300 focus:outline-none cursor-pointer"
+                aria-label={showPassword ? 'Hide password' : 'Show password'}
+              >
+                {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+              </button>
             </div>
           </div>
 
