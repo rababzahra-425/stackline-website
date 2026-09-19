@@ -1,58 +1,102 @@
-# 🚀 Stackline Studio — Full-Stack Web Application & Admin Control Panel
+# 🚀 Stackline Studio — Digital Agency Web Application & Admin CMS
 
-A modern, high-performance studio website built with React, Vite, TailwindCSS, Express.js, and MongoDB.
-
----
-
-## 🔑 Admin Login Credentials
-
-To access the Admin Control Panel (`/admin` or `/admin/login`):
-
-* **Admin Email:** `rababzahra425@gmail.com`
-* **Default Password:** `admin123`
+A state-of-the-art, full-stack digital agency web application and content management system (CMS) engineered with **React (Vite)**, **TailwindCSS**, **Node.js**, **Express.js**, and **MongoDB**.
 
 ---
 
-## ❓ Why is `npm run seed` used?
+## 📋 Executive Overview
 
-### **1. Automatic Seeding on Server Startup**
-When you start the backend server (`npm run dev` in the `/server` directory), the database connection initializer (`config/db.js`) automatically checks MongoDB. If default superadmin accounts do not exist, it automatically creates `rababzahra425@gmail.com` with the default password `admin123`.
+**Stackline Studio** is a full-featured web application designed for a modern creative design & engineering agency. It combines a high-impact, visual public client portal with a secure, real-time administrative management panel. 
 
-### **2. Why `npm run seed` (`node scripts/seedAdmin.js`) exists**
-`npm run seed` is a dedicated CLI utility script provided for administrative convenience:
-* **Manual Reset & Account Recovery:** If you ever change or forget the admin password, or if you clear/reset your MongoDB database, running `npm run seed` in the `server/` directory will instantly restore or update the superadmin account with `rababzahra425@gmail.com` / `admin123`.
-* **Zero Server Overhead:** It seeds the database directly via standalone CLI execution without needing to start the Express HTTP web server.
+The application facilitates seamless client lead generation, portfolio showcase presentation, dynamic service management, team profiling, client testimonial publishing, and editorial journal articles.
 
 ---
 
-## 🛠️ Getting Started & Local Development
+## 🏗️ System Architecture & Technology Stack
 
-### **1. Prerequisites**
-* **Node.js:** v18+
-* **MongoDB:** Local instance running at `mongodb://127.0.0.1:27017` or a MongoDB Atlas URI.
+```mermaid
+graph TD
+    A[Client Browser / Public Portal] -->|HTTP / REST API| B[Express.js API Server]
+    C[Admin Panel / Control Center] -->|JWT Auth / REST API| B
+    B -->|Mongoose ODM| D[(MongoDB Database)]
+    B -->|Resend Mail Service API| E[Admin Gmail Inbox]
+```
+
+### **Frontend Stack**
+* **Framework:** React 18 with Vite HMR
+* **Routing:** React Router v6
+* **Styling:** Custom CSS Design System + TailwindCSS
+* **UI Components:** Lucide Icons, Custom Micro-Animations, Glassmorphism Cards
+* **State & Auth:** React Context API + LocalStorage JWT token management
+
+### **Backend Stack**
+* **Runtime:** Node.js (v18+)
+* **Web Framework:** Express.js (v5)
+* **Database:** MongoDB with Mongoose ODM
+* **Authentication:** JSON Web Tokens (JWT) + BcryptJS password hashing
+* **Email Service:** Resend Mail Service API (`https://api.resend.com/emails`)
+* **Security & Utility:** Helmet, CORS, Morgan Logger, Multer file upload
 
 ---
 
-### **2. Running the Backend Server**
+## 🚀 Key Features & Functional Modules
+
+### **1. Public Client Portal**
+* **Hero Slider & Landing Showcase:** Interactive dynamic hero banner showcasing agency perceptions and high-resolution SVG showcases.
+* **Portfolio Showcase (`/work` & `/work/:slug`):** Interactive project gallery with uncropped image presentation and detailed case study pages.
+* **Service Offerings (`/service`):** Service breakdown cards and interactive step-by-step agency methodology.
+* **Studio Narrative & Team (`/about`):** Agency story, core pillars, team member profiles, and approved client reviews.
+* **Journal & Insights (`/blog` & `/blog/:slug`):** Editorial journal articles with category filtering and article detail reader views.
+* **Interactive Contact Form (`/talk`):** Multi-step service request form with real-time MongoDB recording and automated admin email dispatching.
+
+### **2. Admin Control Panel (`/admin`)**
+* **System Dashboard:** System metrics, quick actions, lead activity statistics, and server status monitors.
+* **Inquiries & Lead Inbox:** Form submission management, status tracking (`new`, `read`, `replied`, `archived`), 12-hour formatted timestamps, and one-click email reply triggers.
+* **Portfolio CMS:** Create, edit, and manage client project case studies, metadata, hero covers, and image galleries.
+* **Services CMS:** Dynamic service creation, positioning, and content editing.
+* **Client Reviews CMS:** Manage and approve public client testimonials.
+* **Journal / Article CMS:** Create and publish blog insights with image assets and categories.
+* **Security & Protected Routes:** Role-based access control preventing unauthorized route navigation.
+
+---
+
+## ⚡ Quickstart & Installation Guide
+
+### **1. Environment Configuration**
+
+Create a `.env` file in the `/server` directory:
+
+```env
+PORT=5000
+MONGO_URI=mongodb://127.0.0.1:27017/kajo_studio
+JWT_SECRET=stackline_admin_secret_key_2026
+ADMIN_ALERT_EMAIL=rababzahra425@gmail.com
+ADMIN_PASSWORD=admin123
+```
+
+---
+
+### **2. Backend Setup**
+
 ```bash
 cd server
 npm install
-npm run seed  # (Optional: Seeds/Resets admin credentials explicitly)
-npm run dev   # Starts Express backend on http://localhost:5000
+npm run seed  # Optional: Seed superadmin credentials manually
+npm run dev   # Starts server at http://localhost:5000
 ```
 
 ---
 
-### **3. Running the Frontend Application**
+### **3. Frontend Setup**
+
 ```bash
 cd frontend
 npm install
-npm run dev   # Starts Vite React frontend on http://localhost:5173
+npm run dev   # Starts Vite React App at http://localhost:5173
 ```
 
 ---
 
-## 📁 Repository Architecture
+## 📄 License & Attribution
 
-* `frontend/`: React + Vite client application with public showcase pages (`/`, `/work`, `/about`, `/service`, `/talk`) and secure `/admin` management routes.
-* `server/`: Express.js REST API server handling authentication, inquiries submission, services, portfolio project showcase, client reviews, and email alerts via Nodemailer.
+Designed and developed for **Stackline Studio**. All rights reserved © 2026.
