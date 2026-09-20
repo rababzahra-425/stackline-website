@@ -13,15 +13,15 @@ export const HeroHeader = () => {
 
       {/* Line 1: ©STACKLINE */}
       <h1 className="font-hero-heading text-[28px] sm:text-[42px] md:text-[56px] lg:text-[72px] xl:text-[84px] tracking-tighter text-current flex items-baseline gap-1.5 sm:gap-2 leading-[0.9]">
-        STACKLINE
+        STACKLINE STUDIO
       </h1>
 
       {/* Line 2: STUDIO */}
-      <div className="flex items-center gap-2 sm:gap-4">
+      {/* <div className="flex items-center gap-2 sm:gap-4">
         <h1 className="font-hero-heading text-[28px] sm:text-[42px] md:text-[56px] lg:text-[72px] xl:text-[84px] tracking-tighter text-current leading-[0.9]">
-          STUDIO
+
         </h1>
-      </div>
+      </div> */}
 
       {/* Subtitle / Bracket text */}
       <div className="mt-2 pl-0.5">
