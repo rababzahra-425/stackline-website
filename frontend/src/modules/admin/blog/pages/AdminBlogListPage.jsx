@@ -267,36 +267,36 @@ export const AdminBlogListPage = () => {
                     </span>
                   </div>
 
-                {/* Actions */}
-                <div className="w-full md:w-1/6 flex items-center justify-end gap-2 shrink-0">
-                  <Link
-                    to={`/admin/blog/${blog._id}`}
-                    className="w-8 h-8 rounded-md bg-slate-100 dark:bg-zinc-800 hover:bg-blue-50 hover:text-blue-600 dark:hover:bg-blue-950/60 text-slate-400 flex items-center justify-center transition-colors cursor-pointer"
-                    title="View Article Details Page"
-                  >
-                    <Eye className="w-4 h-4" />
-                  </Link>
-                  <Link
-                    to={`/admin/blog/${blog._id}/edit`}
-                    className="w-8 h-8 rounded-md bg-slate-100 dark:bg-zinc-800 hover:bg-slate-200 dark:hover:bg-zinc-700 text-slate-500 flex items-center justify-center transition-colors cursor-pointer"
-                    title="Edit Article"
-                  >
-                    <Edit3 className="w-4 h-4" />
-                  </Link>
-                  <button
-                    onClick={() => setDeleteId(blog._id)}
-                    className="w-8 h-8 rounded-md bg-slate-100 dark:bg-zinc-800 hover:bg-rose-50 hover:text-rose-600 dark:hover:bg-rose-950/60 text-slate-400 flex items-center justify-center transition-colors cursor-pointer"
-                    title="Delete Article"
-                  >
-                    <Trash2 className="w-4 h-4" />
-                  </button>
+                  {/* Actions */}
+                  <div className="w-full md:w-1/6 flex items-center justify-end gap-2 shrink-0">
+                    <Link
+                      to={`/admin/blog/${blog._id}`}
+                      className="w-8 h-8 rounded-md bg-slate-100 dark:bg-zinc-800 hover:bg-blue-50 hover:text-blue-600 dark:hover:bg-blue-950/60 text-slate-400 flex items-center justify-center transition-colors cursor-pointer"
+                      title="View Article Details Page"
+                    >
+                      <Eye className="w-4 h-4" />
+                    </Link>
+                    <Link
+                      to={`/admin/blog/${blog._id}/edit`}
+                      className="w-8 h-8 rounded-md bg-slate-100 dark:bg-zinc-800 hover:bg-slate-200 dark:hover:bg-zinc-700 text-slate-500 flex items-center justify-center transition-colors cursor-pointer"
+                      title="Edit Article"
+                    >
+                      <Edit3 className="w-4 h-4" />
+                    </Link>
+                    <button
+                      onClick={() => setDeleteId(blog._id)}
+                      className="w-8 h-8 rounded-md bg-slate-100 dark:bg-zinc-800 hover:bg-rose-50 hover:text-rose-600 dark:hover:bg-rose-950/60 text-slate-400 flex items-center justify-center transition-colors cursor-pointer"
+                      title="Delete Article"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </button>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
-      )}
-    </div>
+        )}
+      </div>
 
       {/* Delete Confirmation Modal */}
       <ConfirmDialog
