@@ -133,8 +133,28 @@ const createService = async (serviceData) => {
   }
 
   const slug = serviceData.slug || slugify(serviceData.title);
-  const count = await Service.countDocuments();
-  const serviceId = serviceData.serviceId || String(count + 1).padStart(2, '0');
+
+  let serviceId = serviceData.serviceId;
+  const isDuplicateId = serviceId ? await Service.exists({ serviceId }) : false;
+
+  if (!serviceId || isDuplicateId) {
+    const services = await Service.find({}, { serviceId: 1 });
+    let maxId = 0;
+    for (const s of services) {
+      const num = parseInt(s.serviceId, 10);
+      if (!isNaN(num) && num > maxId) {
+        maxId = num;
+      }
+    }
+    let nextNum = maxId + 1;
+    let candidateId = String(nextNum).padStart(2, '0');
+
+    while (await Service.exists({ serviceId: candidateId })) {
+      nextNum++;
+      candidateId = String(nextNum).padStart(2, '0');
+    }
+    serviceId = candidateId;
+  }
 
   const newService = await Service.create({
     ...serviceData,

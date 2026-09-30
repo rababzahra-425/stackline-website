@@ -81,11 +81,26 @@ const createTeamMember = async (memberData) => {
     throw { status: 400, message: 'Photo / Portrait image is required' };
   }
 
-  // Generate memberId if not provided
-  if (!memberData.memberId) {
-    const count = await TeamMember.countDocuments();
-    const formattedId = String(count + 1).padStart(2, '0');
-    memberData.memberId = formattedId;
+  // Generate memberId if not provided or if duplicate (find max numeric ID to prevent E11000 duplicate key error)
+  const isDuplicateId = memberData.memberId ? await TeamMember.exists({ memberId: memberData.memberId }) : false;
+
+  if (!memberData.memberId || isDuplicateId) {
+    const members = await TeamMember.find({}, { memberId: 1 });
+    let maxId = 0;
+    for (const m of members) {
+      const num = parseInt(m.memberId, 10);
+      if (!isNaN(num) && num > maxId) {
+        maxId = num;
+      }
+    }
+    let nextNum = maxId + 1;
+    let candidateId = String(nextNum).padStart(2, '0');
+
+    while (await TeamMember.exists({ memberId: candidateId })) {
+      nextNum++;
+      candidateId = String(nextNum).padStart(2, '0');
+    }
+    memberData.memberId = candidateId;
   }
 
   const newMember = await TeamMember.create(memberData);

@@ -57,6 +57,7 @@ app.use((req, res) => {
 
 const PORT = process.env.PORT || 5000;
 
+// Stackline Studio Server Entry Point
 if (process.env.NODE_ENV !== 'test') {
   app.listen(PORT, () => {
     console.log(`🚀 Stackline Studio Server running on port ${PORT}`);
