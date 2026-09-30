@@ -1,0 +1,15 @@
+services:
+
+  server:
+    build:
+      context: ./server
+    ports:
+      - "5000:5000"
+    env_file:
+      - ./server/.env
+
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "3000:80"
