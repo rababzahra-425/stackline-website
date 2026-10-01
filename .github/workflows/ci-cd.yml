@@ -118,4 +118,6 @@ jobs:
       - name: Push Docker images
         env:
           DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+          VITE_API_URL: http://localhost:5000/api
+          VITE_GOOGLE_CLIENT_ID: ${{ secrets.VITE_GOOGLE_CLIENT_ID }}
         run: docker compose push

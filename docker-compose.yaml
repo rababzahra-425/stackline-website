@@ -5,8 +5,8 @@ services:
       context: ./server
     ports:
       - "5000:5000"
-    env_file:
-      - ./server/.env
+    # env_file:
+    #   - ./server/.env
 
   frontend:
     image: ${DOCKERHUB_USERNAME}/stackline-frontend:latest
