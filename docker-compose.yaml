@@ -1,6 +1,6 @@
 services:
-
   server:
+    image: ${DOCKERHUB_USERNAME}/stackline-server:latest
     build:
       context: ./server
     ports:
@@ -9,7 +9,11 @@ services:
       - ./server/.env
 
   frontend:
+    image: ${DOCKERHUB_USERNAME}/stackline-frontend:latest
     build:
       context: ./frontend
+      args:
+        VITE_API_URL: ${VITE_API_URL:-http://localhost:5000/api}
+        VITE_GOOGLE_CLIENT_ID: ${VITE_GOOGLE_CLIENT_ID}
     ports:
       - "3000:80"

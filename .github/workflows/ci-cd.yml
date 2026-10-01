@@ -1,3 +1,54 @@
+# name: Stackline Website CI/CD
+
+# on:
+#   push:
+#     branches:
+#       - main
+
+#   pull_request:
+#     branches:
+#       - main
+
+# jobs:
+
+#   # ==========================================
+#   # CI - Test and Build
+#   # ==========================================
+#   ci:
+#     name: Build and Validate
+#     runs-on: ubuntu-latest
+
+#     steps:
+
+#       # 1. Get repository code
+#       - name: Checkout repository
+#         uses: actions/checkout@v4
+
+#       # 2. Setup Node.js
+#       - name: Setup Node.js
+#         uses: actions/setup-node@v4
+#         with:
+#           node-version: 22
+
+#       # 3. Install frontend dependencies
+#       - name: Install frontend dependencies
+#         working-directory: frontend
+#         run: npm ci
+
+#       # 4. Build frontend
+#       - name: Build frontend
+#         working-directory: frontend
+#         run: npm run build
+
+#       # 5. Install backend dependencies
+#       - name: Install backend dependencies
+#         working-directory: server
+#         run: npm ci
+
+#       # 6. Build Docker images
+#       - name: Build Docker images
+#         run: docker compose build
+
 name: Stackline Website CI/CD
 
 on:
@@ -35,9 +86,12 @@ jobs:
         working-directory: frontend
         run: npm ci
 
-      # 4. Build frontend
+      # 4. Build frontend (Code validation)
       - name: Build frontend
         working-directory: frontend
+        env:
+          VITE_API_URL: http://localhost:5000/api
+          VITE_GOOGLE_CLIENT_ID: ${{ secrets.VITE_GOOGLE_CLIENT_ID }}
         run: npm run build
 
       # 5. Install backend dependencies
@@ -45,6 +99,23 @@ jobs:
         working-directory: server
         run: npm ci
 
-      # 6. Build Docker images
+      # 6. Login to Docker Hub
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      # 7. Build Docker images with tags
       - name: Build Docker images
+        env:
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+          VITE_API_URL: http://localhost:5000/api
+          VITE_GOOGLE_CLIENT_ID: ${{ secrets.VITE_GOOGLE_CLIENT_ID }}
         run: docker compose build
+
+      # 8. Push Docker images to Docker Hub
+      - name: Push Docker images
+        env:
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+        run: docker compose push
