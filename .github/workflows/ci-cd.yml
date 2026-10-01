@@ -1,0 +1,50 @@
+name: Stackline Website CI/CD
+
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+    branches:
+      - main
+
+jobs:
+
+  # ==========================================
+  # CI - Test and Build
+  # ==========================================
+  ci:
+    name: Build and Validate
+    runs-on: ubuntu-latest
+
+    steps:
+
+      # 1. Get repository code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Setup Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      # 3. Install frontend dependencies
+      - name: Install frontend dependencies
+        working-directory: frontend
+        run: npm ci
+
+      # 4. Build frontend
+      - name: Build frontend
+        working-directory: frontend
+        run: npm run build
+
+      # 5. Install backend dependencies
+      - name: Install backend dependencies
+        working-directory: server
+        run: npm ci
+
+      # 6. Build Docker images
+      - name: Build Docker images
+        run: docker compose build
