@@ -43,14 +43,19 @@ const defaultMembers = [
  * Get all team members (Auto-seeds initial team members if collection is empty)
  */
 const getAllTeamMembers = async () => {
-  let members = await TeamMember.find().sort({ order: 1, createdAt: 1 });
+  try {
+    let members = await TeamMember.find().sort({ order: 1, createdAt: 1 });
 
-  if (!members || members.length === 0) {
-    console.log('🌱 Seeding initial team profile cards...');
-    members = await TeamMember.insertMany(defaultMembers);
+    if (!members || members.length === 0) {
+      console.log('🌱 Seeding initial team profile cards...');
+      members = await TeamMember.insertMany(defaultMembers);
+    }
+
+    return members;
+  } catch (err) {
+    console.warn('⚠️ MongoDB query failed for team members, returning defaultMembers fallback');
+    return defaultMembers;
   }
-
-  return members;
 };
 
 /**

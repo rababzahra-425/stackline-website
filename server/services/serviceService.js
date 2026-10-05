@@ -103,14 +103,19 @@ const defaultServices = [
  * Get all services (Auto-seeds default services if collection is empty)
  */
 const getAllServices = async () => {
-  let services = await Service.find().sort({ order: 1, createdAt: 1 });
+  try {
+    let services = await Service.find().sort({ order: 1, createdAt: 1 });
 
-  if (!services || services.length === 0) {
-    console.log('🌱 Seeding initial studio services...');
-    services = await Service.insertMany(defaultServices);
+    if (!services || services.length === 0) {
+      console.log('🌱 Seeding initial studio services...');
+      services = await Service.insertMany(defaultServices);
+    }
+
+    return services;
+  } catch (err) {
+    console.warn('⚠️ MongoDB query failed for services, returning defaultServices fallback');
+    return defaultServices;
   }
-
-  return services;
 };
 
 /**

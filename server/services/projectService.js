@@ -58,14 +58,19 @@ const defaultProjects = [
  * Get all projects (Auto-seeds initial projects if collection is empty)
  */
 const getAllProjects = async () => {
-  let projects = await Project.find().sort({ order: 1, createdAt: -1 });
+  try {
+    let projects = await Project.find().sort({ order: 1, createdAt: -1 });
 
-  if (!projects || projects.length === 0) {
-    console.log('🌱 Seeding initial studio projects...');
-    projects = await Project.insertMany(defaultProjects);
+    if (!projects || projects.length === 0) {
+      console.log('🌱 Seeding initial studio projects...');
+      projects = await Project.insertMany(defaultProjects);
+    }
+
+    return projects;
+  } catch (err) {
+    console.warn('⚠️ MongoDB query failed for projects, returning defaultProjects fallback');
+    return defaultProjects;
   }
-
-  return projects;
 };
 
 /**
