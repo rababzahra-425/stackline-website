@@ -1,4 +1,6 @@
-const API_URL = 'http://localhost:5000/api/seo';
+import { API_BASE_URL } from '@/shared/config/api';
+
+const API_URL = `${API_BASE_URL}/seo`;
 
 const getAuthHeaders = () => {
   const token = localStorage.getItem('kajo_token');

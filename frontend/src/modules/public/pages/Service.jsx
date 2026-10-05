@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { PageHeader } from '../components/common/PageHeader';
 import { SeoHead } from '../../../components/common/SeoHead';
+import { API_BASE_URL } from '@/shared/config/api';
 
 const fallbackServiceCategories = [
     {
@@ -126,7 +127,7 @@ export const ServicePage = () => {
     useEffect(() => {
         const fetchCategories = async () => {
             try {
-                const res = await fetch('http://localhost:5000/api/services');
+                const res = await fetch(`${API_BASE_URL}/services`);
                 const json = await res.json();
                 if (json.success && json.data && json.data.length > 0) {
                     const formatted = json.data.map((item, idx) => ({

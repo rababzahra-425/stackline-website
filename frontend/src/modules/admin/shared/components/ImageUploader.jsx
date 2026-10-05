@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { UploadCloud, Image as ImageIcon, Link as LinkIcon, X, Loader2, Check } from 'lucide-react';
+import { API_BASE_URL } from '@/shared/config/api';
 
 export const ImageUploader = ({
   label = 'Image / Asset',
@@ -24,7 +25,7 @@ export const ImageUploader = ({
     formData.append('image', file);
 
     try {
-      const response = await fetch('http://localhost:5000/api/upload', {
+      const response = await fetch(`${API_BASE_URL}/upload`, {
         method: 'POST',
         headers: token ? { Authorization: `Bearer ${token}` } : {},
         body: formData,
