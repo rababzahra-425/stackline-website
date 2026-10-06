@@ -48,7 +48,15 @@ const getAllTeamMembers = async () => {
 
     if (!members || members.length === 0) {
       console.log('🌱 Seeding initial team profile cards...');
-      members = await TeamMember.insertMany(defaultMembers);
+      try {
+        members = await TeamMember.insertMany(defaultMembers, { ordered: false });
+      } catch (seedErr) {
+        console.warn('⚠️ Seeding initial team members notice:', seedErr.message);
+        members = await TeamMember.find().sort({ order: 1, createdAt: 1 });
+        if (!members || members.length === 0) {
+          members = defaultMembers;
+        }
+      }
     }
 
     return members;
@@ -73,6 +81,28 @@ const getTeamMemberById = async (id) => {
 };
 
 /**
+ * Generate a guaranteed unique memberId
+ */
+const generateUniqueMemberId = async () => {
+  const members = await TeamMember.find({}, { memberId: 1 });
+  let maxId = 0;
+  for (const m of members) {
+    const num = parseInt(m.memberId, 10);
+    if (!isNaN(num) && num > maxId) {
+      maxId = num;
+    }
+  }
+  let nextNum = maxId + 1;
+  let candidateId = String(nextNum).padStart(2, '0');
+
+  while (await TeamMember.exists({ memberId: candidateId })) {
+    nextNum++;
+    candidateId = String(nextNum).padStart(2, '0');
+  }
+  return candidateId;
+};
+
+/**
  * Create a new team member
  */
 const createTeamMember = async (memberData) => {
@@ -86,30 +116,25 @@ const createTeamMember = async (memberData) => {
     throw { status: 400, message: 'Photo / Portrait image is required' };
   }
 
-  // Generate memberId if not provided or if duplicate (find max numeric ID to prevent E11000 duplicate key error)
+  // Generate memberId if not provided or if duplicate
   const isDuplicateId = memberData.memberId ? await TeamMember.exists({ memberId: memberData.memberId }) : false;
 
   if (!memberData.memberId || isDuplicateId) {
-    const members = await TeamMember.find({}, { memberId: 1 });
-    let maxId = 0;
-    for (const m of members) {
-      const num = parseInt(m.memberId, 10);
-      if (!isNaN(num) && num > maxId) {
-        maxId = num;
-      }
-    }
-    let nextNum = maxId + 1;
-    let candidateId = String(nextNum).padStart(2, '0');
-
-    while (await TeamMember.exists({ memberId: candidateId })) {
-      nextNum++;
-      candidateId = String(nextNum).padStart(2, '0');
-    }
-    memberData.memberId = candidateId;
+    memberData.memberId = await generateUniqueMemberId();
   }
 
-  const newMember = await TeamMember.create(memberData);
-  return newMember;
+  try {
+    const newMember = await TeamMember.create(memberData);
+    return newMember;
+  } catch (err) {
+    if (err.code === 11000 || (err.message && err.message.includes('E11000'))) {
+      console.warn('⚠️ Duplicate memberId detected during creation, regenerating unique ID...');
+      memberData.memberId = await generateUniqueMemberId();
+      const newMember = await TeamMember.create(memberData);
+      return newMember;
+    }
+    throw err;
+  }
 };
 
 /**
