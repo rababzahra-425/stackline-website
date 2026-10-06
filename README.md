@@ -85,7 +85,6 @@ npm run seed  # Optional: Seed superadmin credentials manually
 npm run dev   # Starts server at http://localhost:5000
 ```
 
----
 
 ### **3. Frontend Setup**
 
