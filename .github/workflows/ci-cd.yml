@@ -145,29 +145,24 @@ jobs:
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
 
     steps:
-      - name: SSH and Deploy to VPS
+      - name: Deploy to VPS via SSH
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USER }}
-          key: ${{ secrets.VPS_SSH_KEY }}
-          port: ${{ secrets.VPS_PORT }}
-          script: |
-          # Load environment paths (for NVM, Node, npm, pm2)
-            export PATH=$PATH:/usr/local/bin:/usr/bin:~/.nvm/versions/node/$(ls ~/.nvm/versions/node 2>/dev/null | tail -n 1)/bin
-            [ -s "$HOME/.nvm/nvm.sh" ] && \. "$HOME/.nvm/nvm.sh"
+            host: ${{ secrets.VPS_HOST }}
+            username: ${{ secrets.VPS_USER }}
+            password: ${{ secrets.VPS_PASSWORD }}
+            port: ${{ secrets.VPS_PORT }}
+            script_stop: true
+            script: |
+              export PATH=$PATH:/usr/local/bin:/usr/bin:~/.nvm/versions/node/$(ls ~/.nvm/versions/node 2>/dev/null | tail -n 1)/bin
+              [ -s "$HOME/.nvm/nvm.sh" ] && \. "$HOME/.nvm/nvm.sh"
+              cd /opt/stackline-website
+              git checkout main
+              git pull origin main
 
-            
-            cd /opt/stackline-website
-            git checkout main
-            git pull origin main
-
-            # Update & reload backend
-            cd server
-            npm ci --omit=dev
-            pm2 reload stackline-backend --update-env
-
-            # Build frontend
-            cd ../frontend
-            npm ci
-            npm run build
+              cd server
+              npm ci --omit=dev
+              pm2 reload stackline-backend --update-env
+              cd ../frontend
+              npm ci
+              npm run build
