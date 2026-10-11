@@ -40,26 +40,24 @@ describe('Frontend API Configuration (Unit & Environment Resolution)', () => {
     });
   });
 
-  describe('resolveApiBaseUrl - Local Development Environment', () => {
-    it('should fall back to http://localhost:5000/api when no env vars are defined', () => {
-      const devUrl = resolveApiBaseUrl({ PROD: false });
-      expect(devUrl).toBe('http://localhost:5000/api');
+  describe('resolveApiBaseUrl - Base URL & Environment Configuration', () => {
+    it('should default to relative /api when no env vars are defined', () => {
+      const defaultUrl = resolveApiBaseUrl({});
+      expect(defaultUrl).toBe('/api');
     });
 
-    it('should respect VITE_API_BASE_URL in development', () => {
-      const devUrl = resolveApiBaseUrl({
-        PROD: false,
+    it('should respect custom VITE_API_BASE_URL when configured', () => {
+      const customUrl = resolveApiBaseUrl({
         VITE_API_BASE_URL: 'http://localhost:5000/api/',
       });
-      expect(devUrl).toBe('http://localhost:5000/api');
+      expect(customUrl).toBe('http://localhost:5000/api');
     });
 
-    it('should respect VITE_API_URL in development', () => {
-      const devUrl = resolveApiBaseUrl({
-        PROD: false,
+    it('should respect custom VITE_API_URL when configured', () => {
+      const customUrl = resolveApiBaseUrl({
         VITE_API_URL: 'http://127.0.0.1:5000/api',
       });
-      expect(devUrl).toBe('http://127.0.0.1:5000/api');
+      expect(customUrl).toBe('http://127.0.0.1:5000/api');
     });
   });
 });
