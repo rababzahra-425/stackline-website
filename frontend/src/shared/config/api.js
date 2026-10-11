@@ -4,24 +4,23 @@
  * - Production: Defaults to relative '/api' (routed via Nginx reverse proxy to prevent ERR_CONNECTION_REFUSED on VPS)
  * - Development: Falls back to 'http://localhost:5000/api' or custom local dev setting
  */
-const getApiBaseUrl = () => {
-  const envUrl = import.meta.env.VITE_API_BASE_URL || import.meta.env.VITE_API_URL;
+export const resolveApiBaseUrl = (env = import.meta.env) => {
+  const envUrl = env?.VITE_API_BASE_URL || env?.VITE_API_URL;
 
   // In production, guard against accidental localhost URLs and default to relative '/api'
-  if (import.meta.env.PROD || import.meta.env.MODE === 'production') {
+  if (env?.PROD || env?.MODE === 'production') {
     if (!envUrl || envUrl.includes('localhost:5000')) {
       return '/api';
     }
-    return envUrl;
+    return envUrl.replace(/\/+$/, '');
   }
 
   // Local development fallback
-  return envUrl || 'http://localhost:5000/api';
+  const devUrl = envUrl || 'http://localhost:5000/api';
+  return devUrl.replace(/\/+$/, '');
 };
 
-const rawApiUrl = getApiBaseUrl();
-
-// Strip any trailing slashes to keep endpoint strings clean
-export const API_BASE_URL = rawApiUrl.replace(/\/+$/, '');
+// Global active API base URL stripped of trailing slashes
+export const API_BASE_URL = resolveApiBaseUrl(import.meta.env);
 
 export default API_BASE_URL;
