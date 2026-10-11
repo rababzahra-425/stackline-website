@@ -42,7 +42,7 @@ export const AboutPage = () => {
         {/* 2. Hero Typography Header */}
         <div className="max-w-5xl mb-16 md:mb-20">
           <h1 className="font-hero-heading text-[48px] sm:text-[88px] md:text-[110px] lg:text-[140px] uppercase tracking-tight leading-[0.85] select-none mb-8 text-neutral-950 dark:text-white">
-            ABOUT
+            ABOUTTTTTTTTT
           </h1>
           <p className="font-sans text-2xl sm:text-4xl md:text-5xl font-normal leading-tight max-w-4xl text-neutral-800 dark:text-neutral-300 text-balance">
             Learn more about our mission, vision, and the team driving our creative design solutions.
